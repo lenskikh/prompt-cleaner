@@ -8,5 +8,3 @@ Cleans the prompt from duplicate tokens
 
 Removes duplicates that are often inserted into the prompt by newbies
 ![Screenshot](/screenshots/eng_after.png)
-
-![Screenshot](/screenshots/ru_lang.png.png)
