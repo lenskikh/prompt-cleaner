@@ -9,5 +9,4 @@ Cleans the prompt from duplicate tokens
 Removes duplicates that are often inserted into the prompt by newbies
 ![Screenshot](/screenshots/eng_after.png)
 
-<br>
-![Screenshot](/screenshots/ru.png)
+![Screenshot](/screenshots/ru_lang.png.png)
