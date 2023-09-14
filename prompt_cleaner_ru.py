@@ -3,25 +3,41 @@ from ttkbootstrap.constants import *
 from ttkbootstrap.scrolled import ScrolledText
 import re
 
+
 root = ttk.Window("Промпт-чистильщик")
-tokens = {}
 text3 = []
+tokens = {}
+
 
 def cleaner():
+    
     text = text_area.get("1.0", 'end')
 
     #clean
     if "(" or ")" in text:
         text =  re.sub(r'[()]', '', text)
+    # weight 1.3
     if ":" in text:
         text = re.sub(r':\d+\.\d+', '', text)
+    # weight 1 without digit after
     if ":" in text:
         text = re.sub(r':\d+', '', text)
+    # with space symbol token: 1.3
     if ":" in text:
         text = re.sub(r':\s*\d+\.\d+', '', text)
+    if ":" in text: 
+        text = text.replace(":", "")
+    if "+" in text: 
+        text = text.replace("+", ",")
     if "BREAK" in text:
         text = text.replace("BREAK", "")
-        
+
+    reconstruction(text) 
+
+
+def reconstruction(text):
+
+    tokens.clear()
     text2 = text.split(",")
     text3 = []
 
@@ -33,9 +49,11 @@ def cleaner():
 
     #create unique 
     for token in text3:
+        #remove lora in prompt
         if "<lora" in token:
             pass
         else:
+            #create unique
             tokens[token] = ""
 
     #clear text area
@@ -51,6 +69,7 @@ def clean_text_area():
     text3.clear()
 
 def sorted_tokens():
+    cleaner()
     sorted_dict = dict(sorted(tokens.items()))
     text_area.delete('1.0', 'end')
     for token in sorted_dict:
@@ -70,6 +89,7 @@ def paste():
 
 text_area = ScrolledText(root, height = 10, autohide=True)
 text_area.pack(side=LEFT, fill=X, expand=YES, padx=5, pady=0)
+
 
 #------ Buttons ---------
 b3 = ttk.Button(root, text="Отчистить окно", bootstyle="primary-outline", command = clean_text_area)
