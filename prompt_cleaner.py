@@ -47,10 +47,20 @@ def cleaner():
         text = re.sub(r':\s*\d+\.\d+', '', text)
     if ". " in text:
         text = re.sub(r'\. ', ', ', text)
+    if ".," in text:
+        text = re.sub(r'\.\,', ', ', text)     
+    if ",." in text:
+        text = re.sub(r'\,\.', ', ', text)            
     if ":" in text: 
         text = text.replace(":", "")
     if "+" in text: 
         text = text.replace("+", ",")
+    if "!" in text: 
+        text = text.replace("!", "")   
+    if "?" in text: 
+        text = text.replace("?", "")     
+    if '"' in text: 
+        text = text.replace('"', "")                            
     #if used regional prompter
     if "BREAK" in text:
         text = text.replace("BREAK", "")
